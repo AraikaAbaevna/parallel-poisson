@@ -1,0 +1,167 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5678,        158]
+NotebookOptionsPosition[      5177,        138]
+NotebookOutlinePosition[      5514,        153]
+CellTagsIndexPosition[      5471,        150]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", " ", "\[IndentingNewLine]", " ", 
+  RowBox[{"*", " ", 
+   RowBox[{"field", ".", "nb"}], "\[IndentingNewLine]", "*", 
+   "\[IndentingNewLine]", "*", " ", "Reads", " ", "in", " ", "vector", " ", 
+   "field", " ", "E", " ", "from", " ", 
+   RowBox[{"field", ".", "dat"}], " ", "and", " ", "plots", " ", "it", " ", 
+   "as", "\[IndentingNewLine]", "*", " ", "a", " ", "function", " ", "of", 
+   " ", "indices", " ", 
+   RowBox[{"(", 
+    RowBox[{"i", ",", "j"}], ")"}], " ", "with", " ", "arrows", " ", 
+   "representing", " ", 
+   RowBox[{"vectors", "."}]}], "\[IndentingNewLine]", " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.5732901663288383`*^9, 3.573290242264426*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Problem", " ", "size"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"size", " ", "=", " ", "2400"}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.573290249663265*^9, 3.573290257798979*^9}, 
+   3.573296512884945*^9, {3.573387884728901*^9, 3.57338788505801*^9}, {
+   3.5733882730179996`*^9, 3.573388276392909*^9}, {3.573388423137773*^9, 
+   3.5733884238257847`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Current", " ", "directory"}], " ", "*)"}], "\[IndentingNewLine]", 
+  
+  RowBox[{"Directory", "[", "]"}]}]], "Input",
+ CellChangeTimes->{{3.573284447489004*^9, 3.573284451119322*^9}, {
+  3.573290283710359*^9, 3.573290292855123*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Set", " ", "current", " ", "directory", " ", "to", " ", "a", " ", 
+     "subdirectory"}], ",", " ", 
+    RowBox[{"if", " ", "required"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"SetDirectory", "[", "\"\<\>\"", "]"}], ";"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.5732902685828447`*^9, 3.573290273871917*^9}, {
+  3.573387892226329*^9, 3.573387910659136*^9}, {3.573388192506524*^9, 
+  3.573388199326087*^9}, {3.5733884269741*^9, 3.57338842753053*^9}, {
+  3.573388606533772*^9, 3.5733886153568172`*^9}, {3.573388802813796*^9, 
+  3.57338881162871*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Load", " ", "data", " ", "file"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"stream", " ", "=", " ", 
+    RowBox[{"OpenRead", "[", "\"\<field.dat\>\"", "]"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.5732844563391333`*^9, 3.57328446165586*^9}, {
+  3.573284510049127*^9, 3.5732845536336803`*^9}, {3.573290300278965*^9, 
+  3.5732903347317257`*^9}, {3.573296244376669*^9, 3.573296244828724*^9}, {
+  3.573388798653713*^9, 3.573388799156563*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Process", " ", "data"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"rawdata", " ", "=", " ", 
+    RowBox[{"ReadList", "[", 
+     RowBox[{"stream", ",", 
+      RowBox[{"{", 
+       RowBox[{"Number", ",", "Number"}], "}"}]}], "]"}]}], ";"}]}]], "Input",\
+
+ CellChangeTimes->{{3.573284560050083*^9, 3.573284578897924*^9}, 
+   3.573286197010865*^9, {3.573290308455209*^9, 3.573290313527649*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Convert", " ", "data", " ", "to", " ", "correct", " ", "format"}],
+    " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"data", " ", "=", " ", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"i", "/", "size"}], ",", 
+          RowBox[{"j", "/", "size"}]}], "}"}], ",", 
+        RowBox[{"rawdata", "[", 
+         RowBox[{"[", 
+          RowBox[{"j", "+", 
+           RowBox[{"size", "*", "i"}], "+", "1"}], "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "0", ",", 
+        RowBox[{"size", "-", "1"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"j", ",", "0", ",", 
+        RowBox[{"size", "-", "1"}]}], "}"}]}], "]"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.573284587846168*^9, 3.5732845972504663`*^9}, {
+   3.573284721114174*^9, 3.5732847899481564`*^9}, 3.5732848215625887`*^9, {
+   3.5732849022372217`*^9, 3.573284910780332*^9}, {3.573285018573463*^9, 
+   3.573285045274941*^9}, {3.573285098134355*^9, 3.573285100366341*^9}, {
+   3.573285948770349*^9, 3.57328595160214*^9}, {3.573285996402603*^9, 
+   3.57328609785168*^9}, {3.573286178229052*^9, 3.5732861913400307`*^9}, {
+   3.573290260459601*^9, 3.573290261643877*^9}, {3.5732903181116133`*^9, 
+   3.573290325764864*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ListVectorPlot", "[", "data", "]"}]], "Input",
+ CellChangeTimes->{{3.573286116363052*^9, 3.573286123513476*^9}}]
+},
+WindowSize->{767, 867},
+WindowMargins->{{Automatic, 197}, {Automatic, 28}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 698, 13, 126, "Input"],
+Cell[1258, 35, 434, 9, 50, "Input"],
+Cell[1695, 46, 289, 7, 50, "Input"],
+Cell[1987, 55, 682, 16, 50, "Input"],
+Cell[2672, 73, 522, 11, 50, "Input"],
+Cell[3197, 86, 466, 12, 50, "Input"],
+Cell[3666, 100, 1368, 32, 69, "Input"],
+Cell[5037, 134, 136, 2, 30, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
