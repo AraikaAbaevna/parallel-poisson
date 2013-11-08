@@ -1,8 +1,5 @@
 /** 
  * poisson.c
- *
- * CY901 Assignment 6
- * Student ID: 0903448
  */
 
 /* Include libraries */
